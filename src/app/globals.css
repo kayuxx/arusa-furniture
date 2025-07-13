@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* credits to Kevin Powel to this approch to handle the viewport content */
+.content-grid,
+.fw {
+  @apply md:grid md:grid-cols-[[fw-s]_0.5fr_[cn-s]_6fr_[cn-e]_0.5fr_[fw-e]];
+}
+
+.content-grid > :not(.fw),
+.fw > :not(.fw) {
+  grid-column: cn-s / cn-e;
+}
+
+.content-grid > .fw {
+  grid-column: fw-s / fw-e;
+}
