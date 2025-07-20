@@ -1,4 +1,23 @@
 {
+  "Header": {
+    "NavBar": {
+      "shop": "تسوق",
+      "bag": "حقيبة"
+    }
+  },
+  "header": {
+    "navbar": {
+      "shop": {
+        "title": "تسوق"
+      },
+      "bag": {
+        "title": "حقيبة",
+        "dialog": {
+          "title": "ملخص الطلب"
+        }
+      }
+    }
+  },
   "HomePage": {
     "greetings": "مرحبا أيها العالم"
   }

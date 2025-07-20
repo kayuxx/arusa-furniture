@@ -1,4 +1,17 @@
 {
+  "header": {
+    "navbar": {
+      "shop": {
+        "title": "SHOP"
+      },
+      "bag": {
+        "title": "BAG",
+        "dialog": {
+          "title": "ORDER SUMMARY"
+        }
+      }
+    }
+  },
   "HomePage": {
     "greetings": "Hello World"
   }

@@ -1,20 +1,128 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Readex_Pro } from "next/font/google";
 import "../globals.css";
-import { getLangDir } from "@/utils/i18n";
+import { getLangDir, isRtl } from "@/utils/i18n";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import NavBar from "@/components/NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const neueMontreal = localFont({
+  src: [
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Light.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Light.otf",
+      weight: "100",
+      style: "italic",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-MediumItalic.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../../public/Neue Montreal/NeueMontreal-BoldItalic.otf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-neue-montreal",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const madaniFont = localFont({
+  src: [
+    {
+      path: "../../../public/madani font/MadaniArabicDEMO-Thin.otf",
+      style: "normal",
+      weight: "100",
+    },
+    {
+      path: "../../../public/madani font/MadaniArabicDEMO-Regular.otf",
+      style: "normal",
+      weight: "400",
+    },
+    {
+      path: "../../../public/madani font/MadaniArabicDEMO-Bold.otf",
+      style: "normal",
+      weight: "700",
+    },
+    {
+      path: "../../../public/madani font/MadaniArabicDEMO-Black.otf",
+      style: "normal",
+      weight: "900",
+    },
+  ],
+  variable: "--font-madani-ar",
+  display: "swap",
+});
+
+const readexPro = Readex_Pro({
+  variable: "--font-readex-pro",
+  weight: ["200", "300", "400", "500", "600", "700"],
+  subsets: ["arabic"],
+});
+
+const reckless = localFont({
+  src: [
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-Thin.ttf",
+      style: "normal",
+      weight: "100",
+    },
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-ThinItalic.ttf",
+      style: "itlic",
+      weight: "100",
+    },
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-Regular.ttf",
+      style: "normal",
+      weight: "400",
+    },
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-RegularItalic.ttf",
+      style: "italic",
+      weight: "400",
+    },
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-Bold.ttf",
+      style: "normal",
+      weight: "700",
+    },
+    {
+      path: "../../../public/RecklessNeue/RecklessNeue-BoldItalic.ttf",
+      style: "italic",
+      weight: "700",
+    },
+  ],
+  variable: "--font-reckless-neue",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -40,10 +148,12 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${madaniFont.variable} ${neueMontreal.variable} ${readexPro.variable} ${reckless.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <header className="content-grid">
+          <header
+            className={`content-grid ${isRtl(locale) ? "font-rdx font-light" : "font-neue"} text-white`}
+          >
             <NavBar />
           </header>
           {children}
