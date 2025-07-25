@@ -20,14 +20,11 @@ type BagDialogType = {
 export default function BagDialog({ t, ids, refDialog }: BagDialogType) {
   // TODO-TODAY: implement dialog open and close and remove item from the bag (zutstand related)
   const locale = useLocale();
-
-  const manyQueries = ids.map((e) => ({
-    queryKey: ["bag-products"],
-    queryFn: () => getProduct(e),
-  }));
-
   const manyData = useQueries({
-    queries: manyQueries,
+    queries: ids.map((id) => ({
+      queryKey: ["bag-product", id],
+      queryFn: () => getProduct(id),
+    })),
   });
 
   const buildImageProp = (e: Product["image"]) => ({
