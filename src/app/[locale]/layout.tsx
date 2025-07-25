@@ -7,6 +7,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import NavBar from "@/components/NavBar";
+import Providers from "@/components/Providers";
 
 const neueMontreal = localFont({
   src: [
@@ -52,33 +53,6 @@ const neueMontreal = localFont({
     },
   ],
   variable: "--font-neue-montreal",
-  display: "swap",
-});
-
-const madaniFont = localFont({
-  src: [
-    {
-      path: "../../../public/madani font/MadaniArabicDEMO-Thin.otf",
-      style: "normal",
-      weight: "100",
-    },
-    {
-      path: "../../../public/madani font/MadaniArabicDEMO-Regular.otf",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "../../../public/madani font/MadaniArabicDEMO-Bold.otf",
-      style: "normal",
-      weight: "700",
-    },
-    {
-      path: "../../../public/madani font/MadaniArabicDEMO-Black.otf",
-      style: "normal",
-      weight: "900",
-    },
-  ],
-  variable: "--font-madani-ar",
   display: "swap",
 });
 
@@ -137,7 +111,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
   children: React.ReactNode;
 }>) {
-  // Ensure that the incoming `locale` is valid
+  // Ensure incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -148,15 +122,22 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir}>
       <body
-        className={`${madaniFont.variable} ${neueMontreal.variable} ${readexPro.variable} ${reckless.variable} antialiased`}
+        className={`${neueMontreal.variable} ${readexPro.variable} ${reckless.variable} antialiased`}
       >
+        {/* it would throw an error if the parent is client component */}
         <NextIntlClientProvider>
-          <header
-            className={`content-grid ${isRtl(locale) ? "font-rdx font-light" : "font-neue"} text-white`}
-          >
-            <NavBar />
-          </header>
-          {children}
+          <Providers>
+            <header
+              className={`content-grid ${isRtl(locale) ? "font-rdx font-light" : "font-neue"} text-white`}
+            >
+              <NavBar />
+            </header>
+            <main
+              className={`content-grid ${isRtl(locale) ? "font-rdx font-light" : "font-neue"} text-white`}
+            >
+              {children}
+            </main>
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
