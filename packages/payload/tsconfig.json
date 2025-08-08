@@ -1,0 +1,18 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/payload/*": ["./src/*"],
+      "@repo/payload/access/*": ["./src/access/*"],
+      "@repo/payload/collections/*": ["./src/collections/*"],
+      "@repo/payload/components/*": ["./src/components/*"],
+      "@repo/payload/fields/*": ["./src/fields/*"],
+      "@repo/payload/payload-config": ["./src/payload.config"],
+      "@repo/payload/payload-types": ["./src/payload.types"],
+      "@repo/payload/plugins/*": ["./src/plugins/*"]
+    },
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+  },
+  "exclude": ["node_modules", "src/payload.types.ts", ".next"]
+}

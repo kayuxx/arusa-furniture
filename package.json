@@ -1,33 +1,33 @@
 {
-  "name": "arusa-furniture",
-  "version": "0.1.0",
+  "name": "with-tailwind",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@deemlol/next-icons": "^0.1.9",
-    "@sanity/image-url": "^1.1.0",
-    "@tanstack/react-query": "^5.83.0",
-    "next": "15.3.5",
-    "next-intl": "^4.3.4",
-    "next-sanity": "^10.0.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "uuid": "^11.1.0"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean:cache": "rm -rf ./node_modules/ ./pnpm-lock.yaml ./apps/payload/node_modules/ ./apps/payload/.next ./apps/web/node_modules/ ./apps/web/.next"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.5",
-    "@eslint/eslintrc": "^3"
+    "prettier": "^3.6.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "turbo": "^2.5.5"
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
+  "engines": {
+    "node": ">=18"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@prisma/client",
+      "@prisma/engines",
+      "@tailwindcss/oxide",
+      "prisma",
+      "sharp",
+      "esbuild",
+      "unrs-resolver"
+    ]
   }
 }

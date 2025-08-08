@@ -1,0 +1,44 @@
+ .label-wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   button {
+     margin: 0;
+     padding-bottom: 0.3125rem;
+   }
+ }
+
+ .generate-button {
+   margin: 0;
+   padding-bottom: 0.3125rem;
+ }
+
+ .color-picker-parent {
+
+   .color-picker {
+     background-color: var(--theme-input-bg) !important;
+     border: 1px solid var(--theme-elevation-150) !important;
+     margin-top: 10px;
+     width: 100% !important;
+   }
+ }
+
+
+ .react-colorful {
+   width: 100% !important;
+   height: 150px !important;
+   margin-top: 20px;
+
+   .react-colorful__pointer {
+     width: 20px !important;
+     ;
+     height: 20px !important;
+     ;
+   }
+
+   .react-colorful__hue {
+     height: 8px !important;
+     ;
+   }
+ }
