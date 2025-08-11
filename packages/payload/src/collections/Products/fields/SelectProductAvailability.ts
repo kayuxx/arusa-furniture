@@ -1,13 +1,7 @@
 import type { Field } from "payload";
 import countries from "i18n-iso-countries";
 import { continents } from "../../../constants";
-
-function getCountryFlag(countryCode: string) {
-  return String.fromCodePoint(
-    0x1f1e6 + countryCode.charCodeAt(0) - 65, // First letter (A-Z)
-    0x1f1e6 + countryCode.charCodeAt(1) - 65, // Second letter (A-Z)
-  );
-}
+import { getCountryFlag } from "@repo/payload/utilities/getCountryFlag";
 
 const RegionField: Field = {
   name: "region",

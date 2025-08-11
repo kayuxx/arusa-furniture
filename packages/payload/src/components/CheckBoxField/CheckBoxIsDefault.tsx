@@ -1,22 +1,40 @@
-import type React from 'react'
-import { CheckboxField, FieldLabel } from '@payloadcms/ui'
-import type { CheckboxFieldServerComponent } from 'payload'
+"use client";
+import type React from "react";
+import {
+  CheckboxField,
+  FieldLabel,
+  useDocumentInfo,
+  useField,
+  useFormFields,
+  useWatchForm,
+} from "@payloadcms/ui";
+import type { CheckboxFieldClientComponent } from "payload";
+import { useEffect, useState } from "react";
 
-export const CheckBoxIsDefault: CheckboxFieldServerComponent = async ({
-  clientField,
+export const CheckBoxIsDefault: CheckboxFieldClientComponent = ({
+  field: clientField,
   path,
   schemaPath,
   permissions,
-  payload,
-  ...args
 }) => {
-  const currencies = await payload.find({
-    collection: 'currencies',
-  })
-  const defaultCurrency = currencies.docs.find((e) => e.is_default)
-  let shouldShow = !!defaultCurrency?.is_default
-  const currentItem = args.data.id === defaultCurrency?.id
-  if (currentItem) shouldShow = false
+  const [shouldShow, setShoudShow] = useState(false);
+  const { getData } = useWatchForm();
+  const { value: currencyCode } = useField({
+    path: path.replace(/\.[^.]+$/, ".currency"),
+  });
+  const data = getData();
+  const defaultCurrency = (
+    data["currencies"] as [
+      { is_default: boolean; name: string; currency: string },
+    ]
+  ).find((e) => e.is_default);
+
+  useEffect(() => {
+    if (currencyCode !== defaultCurrency?.currency) {
+      setShoudShow(Boolean(defaultCurrency));
+    }
+  }, [data]);
+
   return (
     <>
       <CheckboxField
@@ -32,6 +50,6 @@ export const CheckBoxIsDefault: CheckboxFieldServerComponent = async ({
         />
       )}
     </>
-  )
-}
-export default CheckBoxIsDefault
+  );
+};
+export default CheckBoxIsDefault;

@@ -1,13 +1,11 @@
 "use client";
 import getBagProducts from "@/actions/getBagProducts";
-import { getProduct } from "@/sanity/getProduct";
-import { urlFor } from "@/sanity/sanityImageUrl";
-import { Price, Product } from "@/types/sanity";
+import { getProductById } from "@/actions/getProductById";
+import { getVercelBlob } from "@/actions/getVercelBlob";
 import { Unarray } from "@/types/utils";
 import { formatPrice } from "@/utils/formatting";
 import { isRtl } from "@/utils/i18n";
 import { Minus, Plus, X } from "@deemlol/next-icons";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -32,13 +30,10 @@ export default function BagDialog({ refDialog }: BagDialogType) {
   const manyData = useQueries({
     queries: bagProducts
       ? bagProducts.map(({ productId }) => ({
-          queryKey: ["bag-product", productId],
-          queryFn: () => getProduct(productId),
+          queryKey: ["product", productId],
+          queryFn: () => getProductById(productId),
         }))
       : [],
-  });
-  const buildImageProp = (e: Product["image"]) => ({
-    _ref: e?.asset?._ref,
   });
 
   return (
@@ -67,8 +62,8 @@ export default function BagDialog({ refDialog }: BagDialogType) {
             key={ind}
             productName={product.data.name}
             productPrice={preferedPrice || usdPrice}
-            productImage={buildImageProp(product.data?.image)}
-            productSize={product.data.dimensions}
+            productImage={getVercelBlob(product.data.heroImage.filename)}
+            productSize={product.data}
             productMetaQuantity={bagProducts[ind].quantity}
             t={t}
           />

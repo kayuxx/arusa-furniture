@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
-import { TextField, useField, useFormFields } from "@payloadcms/ui";
+import { TextField, useField } from "@payloadcms/ui";
 import type { TextFieldClientComponent } from "payload";
 import { currencies } from "@repo/payload/constants";
 
 export const CurrencyName: TextFieldClientComponent = (props) => {
-  const { setValue: setTextValue } = useField({ path: "name" });
-  const { value: currencyCode } = useFormFields(([fields]) => fields.currency);
+  const { setValue: setTextValue } = useField({ path: props.path });
+  const { value: currencyCode } = useField({
+    path: props.path.replace(/\.[^.]+$/, ".currency"),
+  });
 
   useEffect(() => {
     if (currencyCode) {

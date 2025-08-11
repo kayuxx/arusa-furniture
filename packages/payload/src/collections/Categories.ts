@@ -22,6 +22,6 @@ export const Categories: CollectionConfig = {
       type: "text",
       required: true,
     },
-    ...slugField(),
+    slugField(),
   ],
 };

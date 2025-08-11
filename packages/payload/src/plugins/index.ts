@@ -5,7 +5,7 @@ import { seoPlugin } from "@payloadcms/plugin-seo";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { type Plugin } from "payload";
-import { Product } from "../payload-types";
+import { Product } from "@payload-types";
 
 const generateTitle: GenerateTitle<Product> = ({ doc }) => {
   return doc?.name
@@ -32,7 +32,8 @@ export const plugins: Plugin[] = [
     collections: {
       media: true,
     },
-    token: process.env.PAYLOAD_BLOB_READ_WRITE_TOKEN,
+    token: process.env.BLOB_READ_WRITE_TOKEN,
+    addRandomSuffix: true,
   }),
   payloadCloudPlugin(),
 ];

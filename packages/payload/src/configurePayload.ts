@@ -12,9 +12,10 @@ import { Coupons } from "./collections/Coupons";
 import { Categories } from "./collections/Categories";
 import { plugins } from "./plugins";
 import { getServerSideURL } from "./utilities/getURL";
-import { Currencies } from "./collections/Currencies";
 import { Orders } from "./collections/Orders";
 import { Users } from "./collections/Users";
+import { Currencies } from "./globals/Currencies";
+import { Regions } from "./globals/Regions";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -25,15 +26,8 @@ const baseConfig: Config = {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [
-    Products,
-    Coupons,
-    Categories,
-    Media,
-    Currencies,
-    Users,
-    Orders,
-  ],
+  collections: [Products, Coupons, Categories, Media, Users, Orders],
+  globals: [Regions, Currencies],
   cors: [getServerSideURL()].filter(Boolean),
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

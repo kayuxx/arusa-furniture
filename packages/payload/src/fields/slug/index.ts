@@ -1,56 +1,38 @@
-import type { CheckboxField, TextField } from "payload";
+import type { Field, TextFieldClientProps } from "payload";
 
 import { formatSlugHook } from "./formatSlug";
+type Overrides = Omit<TextFieldClientProps["field"], "name"> | undefined;
 
-type Overrides = {
-  slugOverrides?: Partial<TextField>;
-  checkboxOverrides?: Partial<CheckboxField>;
-};
+type Slug = (fieldToUse?: string, overrides?: Overrides) => Field;
 
-type Slug = (
-  fieldToUse?: string,
-  overrides?: Overrides,
-) => [TextField, CheckboxField];
-
-export const slugField: Slug = (fieldToUse = "title", overrides = {}) => {
-  const { slugOverrides, checkboxOverrides } = overrides;
-
-  const checkBoxField: CheckboxField = {
-    name: "slugLock",
-    type: "checkbox",
-    defaultValue: true,
-    admin: {
-      hidden: true,
-      position: "sidebar",
-    },
-    ...checkboxOverrides,
-  };
-
-  // @ts-expect-error - ts mismatch Partial<TextField> with TextField
-  const slugField: TextField = {
+export const slugField: Slug = (fieldToUse = "title", overrides) => {
+  //@ts-ignore
+  const slugField: Field = {
     name: "slug",
     type: "text",
     index: true,
     label: "Slug",
-    ...(slugOverrides || {}),
+    localized: true,
+    ...overrides,
     hooks: {
       // Kept this in for hook or API based updates
       beforeValidate: [formatSlugHook(fieldToUse)],
     },
     admin: {
       position: "sidebar",
-      ...(slugOverrides?.admin || {}),
+      ...(overrides?.admin || {}),
       components: {
         Field: {
           path: "@repo/payload/fields/slug/SlugComponent#SlugComponent",
           clientProps: {
             fieldToUse,
-            checkboxFieldPath: checkBoxField.name,
+            readOnly: true,
           },
         },
       },
     },
   };
 
-  return [slugField, checkBoxField];
+  return slugField;
 };
+slugField;

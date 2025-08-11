@@ -10,7 +10,8 @@
       "@repo/payload/fields/*": ["./src/fields/*"],
       "@repo/payload/payload-config": ["./src/payload.config"],
       "@repo/payload/payload-types": ["./src/payload.types"],
-      "@repo/payload/plugins/*": ["./src/plugins/*"]
+      "@repo/payload/plugins/*": ["./src/plugins/*"],
+      "@payload-types": ["./src/payload-types.ts"]
     },
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },

@@ -1,14 +1,15 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload";
 
 export const Media: CollectionConfig = {
-  slug: 'media',
+  slug: "media",
   access: {
     read: () => true,
   },
   fields: [
     {
-      name: 'alt',
-      type: 'text',
+      name: "alt",
+      type: "text",
+      localized: true,
       required: true,
     },
   ],
@@ -16,6 +17,6 @@ export const Media: CollectionConfig = {
     disableLocalStorage: true,
     cacheTags: false,
     allowRestrictedFileTypes: false,
-    mimeTypes: ['image/*', 'video/*'],
+    mimeTypes: ["image/*", "video/*"],
   },
-}
+};

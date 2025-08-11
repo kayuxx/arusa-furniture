@@ -83,6 +83,7 @@ export const Products: CollectionConfig = {
         ],
       },
     },
+    slugField("name", { localized: true }),
     {
       name: "name",
       type: "text",
@@ -95,7 +96,6 @@ export const Products: CollectionConfig = {
         {
           label: "Details",
           fields: [
-            ...slugField("name"),
             {
               type: "upload",
               name: "heroImage",
@@ -125,10 +125,10 @@ export const Products: CollectionConfig = {
               },
               type: "array",
               validate: async (values, { req: { payload } }) => {
-                const currencies = await payload.find({
-                  collection: "currencies",
+                const result = await payload.findGlobal({
+                  slug: "currenciesList",
                 });
-                const defaultCurrency = currencies.docs.find(
+                const defaultCurrency = result.currencies.find(
                   (e) => e.is_default,
                 );
                 const defaultPrice = (values as { currency: string }[]).find(
@@ -190,8 +190,8 @@ export const Products: CollectionConfig = {
               name: "categories",
               type: "relationship",
               relationTo: "categories",
+              hasMany: true,
               admin: { isSortable: false },
-
               localized: true,
               required: true,
             },

@@ -1,16 +1,21 @@
-'use client'
-import { Data, Option, SelectFieldClient, TextFieldClientComponent } from 'payload'
-import { SelectField, useDocumentInfo } from '@payloadcms/ui'
-import React, { useEffect, useState } from 'react'
-import getCurrenciesAction from './getCurrenciesAction'
+"use client";
+import {
+  Data,
+  Option,
+  SelectFieldClient,
+  TextFieldClientComponent,
+} from "payload";
+import { SelectField, useDocumentInfo } from "@payloadcms/ui";
+import React, { useEffect, useState } from "react";
+import getCurrenciesAction from "./getCurrenciesAction";
 
 function filterOptions(options: Option[], savedDocumentData: Data) {
-  const da = options.filter((e) =>
+  return options.filter((e) =>
     savedDocumentData.price.every(
-      (d: { currency: string }) => d.currency !== (e as { value: string }).value,
+      (d: { currency: string }) =>
+        d.currency !== (e as { value: string }).value,
     ),
-  )
-  return da
+  );
 }
 
 export const SelectCurrency: TextFieldClientComponent = ({
@@ -19,25 +24,27 @@ export const SelectCurrency: TextFieldClientComponent = ({
   permissions,
   schemaPath,
 }) => {
-  const { savedDocumentData } = useDocumentInfo()
-  const [options, setOptions] = useState<Option[] | []>([])
+  const { savedDocumentData } = useDocumentInfo();
+  const [options, setOptions] = useState<Option[] | []>([]);
 
   useEffect(() => {
     const fetchOptions = async () => {
-      const currencies = await getCurrenciesAction()
-      const fetchedOptions = currencies.docs.map((e) => ({
+      const result = await getCurrenciesAction();
+      const fetchedOptions = result.currencies.map((e) => ({
         label: e.name,
         value: e.currency,
-      }))
+      }));
       setOptions(
-        savedDocumentData ? filterOptions(fetchedOptions, savedDocumentData) : fetchedOptions,
-      )
-    }
-    fetchOptions()
-  }, [savedDocumentData])
+        savedDocumentData
+          ? filterOptions(fetchedOptions, savedDocumentData)
+          : fetchedOptions,
+      );
+    };
+    fetchOptions();
+  }, [savedDocumentData]);
 
-  const clientSelectField: Omit<SelectFieldClient, 'type'> &
-    Partial<Pick<SelectFieldClient, 'type'>> = {
+  const clientSelectField: Omit<SelectFieldClient, "type"> &
+    Partial<Pick<SelectFieldClient, "type">> = {
     name: field.name,
     options,
     label: field.label,
@@ -50,7 +57,7 @@ export const SelectCurrency: TextFieldClientComponent = ({
       description: field.admin?.description,
       disabled: field.admin?.disabled,
     },
-  }
+  };
 
   return (
     <SelectField
@@ -59,7 +66,7 @@ export const SelectCurrency: TextFieldClientComponent = ({
       field={clientSelectField}
       permissions={permissions}
     />
-  )
-}
+  );
+};
 
-export default SelectCurrency
+export default SelectCurrency;
