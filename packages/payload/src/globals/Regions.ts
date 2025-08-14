@@ -3,7 +3,7 @@ import countries from "i18n-iso-countries";
 
 import { continents } from "../constants";
 import { getCountryFlag } from "@repo/payload/utilities/getCountryFlag";
-import { adminOrSelf } from "../access/admin";
+import { admin } from "../access/admin";
 import { revalidateTag } from "next/cache";
 
 function buildMerketField(region: keyof typeof continents): Field {
@@ -45,8 +45,8 @@ function buildMerketField(region: keyof typeof continents): Field {
 export const Regions: GlobalConfig = {
   slug: "regions",
   access: {
-    read: adminOrSelf,
-    update: adminOrSelf,
+    read: admin,
+    update: admin,
   },
   hooks: {
     afterChange: [() => revalidateTag("g_regions")],

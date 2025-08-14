@@ -1,14 +1,14 @@
 import type { GlobalConfig } from "payload";
 
-import { authenticated } from "@repo/payload/access/authenticated";
 import { currencies } from "@repo/payload/constants";
+import { admin } from "../access/admin";
 
 export const Currencies: GlobalConfig = {
   slug: "currenciesList",
   label: "Currencies",
   access: {
-    read: authenticated,
-    update: authenticated,
+    read: admin,
+    update: admin,
   },
   fields: [
     {
