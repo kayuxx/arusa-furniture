@@ -15,6 +15,7 @@ export const Orders: CollectionConfig = {
   },
   admin: {
     useAsTitle: "order-id",
+    group: "Sales & Marketing",
   },
   fields: [
     {

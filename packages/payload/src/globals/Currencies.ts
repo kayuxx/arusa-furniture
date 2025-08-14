@@ -10,6 +10,9 @@ export const Currencies: GlobalConfig = {
     read: admin,
     update: admin,
   },
+  admin: {
+    group: "Markets",
+  },
   fields: [
     {
       name: "currencies",

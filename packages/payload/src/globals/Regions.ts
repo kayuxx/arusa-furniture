@@ -48,6 +48,9 @@ export const Regions: GlobalConfig = {
     read: admin,
     update: admin,
   },
+  admin: {
+    group: "Markets",
+  },
   hooks: {
     afterChange: [() => revalidateTag("g_regions")],
   },

@@ -42,6 +42,7 @@ export const Products: CollectionConfig = {
     maxPerDoc: 10,
   },
   admin: {
+    group: "Catalog",
     useAsTitle: "name",
     // defaultColumns: ['name', 'slug', 'updatedAt'],
   },

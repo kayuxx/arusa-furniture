@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 import { marketingManager } from "@repo/payload/access/manager";
-
+// TODO: we may delete a coupon that is already expired using hooks.
 export const Coupons: CollectionConfig = {
   slug: "coupons",
   access: {
@@ -9,6 +9,9 @@ export const Coupons: CollectionConfig = {
     delete: marketingManager,
     read: marketingManager,
     update: marketingManager,
+  },
+  admin: {
+    group: "Sales & Marketing",
   },
   fields: [
     {
