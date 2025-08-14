@@ -20,7 +20,7 @@
     "@vercel/blob": "^1.1.1",
     "next": "^15.4.2",
     "next-intl": "^4.3.4",
-    "payload": "3.50.0",
+    "payload": "3.51.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "uuid": "^11.1.0",

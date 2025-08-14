@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "clean:cache": "rm -rf ./node_modules/ ./pnpm-lock.yaml ./apps/payload/node_modules/ ./apps/payload/.next ./apps/web/node_modules/ ./apps/web/.next"
+    "clean:cache": "rm -rf ./node_modules/ ./apps/payload/node_modules/ ./apps/payload/.next ./apps/web/node_modules/ ./apps/web/.next"
   },
   "devDependencies": {
     "prettier": "^3.6.0",
