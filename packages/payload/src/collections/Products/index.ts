@@ -174,7 +174,7 @@ export const Products: CollectionConfig = {
             {
               type: "array",
               name: "regions",
-              fields: [...SelectProductAvailability],
+              fields: SelectProductAvailability,
               required: true,
               unique: true,
             },

@@ -1,7 +1,5 @@
 import type { Field } from "payload";
-import countries from "i18n-iso-countries";
 import { continents } from "../../../constants";
-import { getCountryFlag } from "@repo/payload/utilities/getCountryFlag";
 
 const RegionField: Field = {
   name: "region",
@@ -34,22 +32,12 @@ const RegionField: Field = {
 const MarketsField: Field = {
   name: "markets",
   label: "Markets",
-  type: "select",
-  hasMany: true,
-  options: Object.entries(countries.getNames("en")).map((e) => ({
-    label: getCountryFlag(e[0]) + " " + e[1],
-    value: e[0],
-  })),
+  type: "text",
   admin: {
     condition: (_, siblingData) => Boolean(siblingData?.region),
-    isSortable: false,
-  },
-  filterOptions: ({ options, data: _, siblingData }) => {
-    const region = siblingData.region as keyof typeof continents;
-    const markets = continents[region] || [];
-    return options.filter((o) =>
-      markets.includes(typeof o === "string" ? o : o.value),
-    );
+    components: {
+      Field: "@repo/payload/components/SelectField/SelectMarkets",
+    },
   },
   required: true,
 };

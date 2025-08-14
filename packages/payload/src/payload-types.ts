@@ -159,260 +159,7 @@ export interface Product {
   discount?: number | null;
   regions: {
     region: 'Europe' | 'Asia' | 'Africa' | 'Americas';
-    markets?:
-      | (
-          | 'AF'
-          | 'AL'
-          | 'DZ'
-          | 'AS'
-          | 'AD'
-          | 'AO'
-          | 'AI'
-          | 'AQ'
-          | 'AG'
-          | 'AR'
-          | 'AM'
-          | 'AW'
-          | 'AU'
-          | 'AT'
-          | 'AZ'
-          | 'BS'
-          | 'BH'
-          | 'BD'
-          | 'BB'
-          | 'BY'
-          | 'BE'
-          | 'BZ'
-          | 'BJ'
-          | 'BM'
-          | 'BT'
-          | 'BO'
-          | 'BA'
-          | 'BW'
-          | 'BV'
-          | 'BR'
-          | 'IO'
-          | 'BN'
-          | 'BG'
-          | 'BF'
-          | 'BI'
-          | 'KH'
-          | 'CM'
-          | 'CA'
-          | 'CV'
-          | 'KY'
-          | 'CF'
-          | 'TD'
-          | 'CL'
-          | 'CN'
-          | 'CX'
-          | 'CC'
-          | 'CO'
-          | 'KM'
-          | 'CG'
-          | 'CD'
-          | 'CK'
-          | 'CR'
-          | 'CI'
-          | 'HR'
-          | 'CU'
-          | 'CY'
-          | 'CZ'
-          | 'DK'
-          | 'DJ'
-          | 'DM'
-          | 'DO'
-          | 'EC'
-          | 'EG'
-          | 'SV'
-          | 'GQ'
-          | 'ER'
-          | 'EE'
-          | 'ET'
-          | 'FK'
-          | 'FO'
-          | 'FJ'
-          | 'FI'
-          | 'FR'
-          | 'GF'
-          | 'PF'
-          | 'TF'
-          | 'GA'
-          | 'GM'
-          | 'GE'
-          | 'DE'
-          | 'GH'
-          | 'GI'
-          | 'GR'
-          | 'GL'
-          | 'GD'
-          | 'GP'
-          | 'GU'
-          | 'GT'
-          | 'GN'
-          | 'GW'
-          | 'GY'
-          | 'HT'
-          | 'HM'
-          | 'VA'
-          | 'HN'
-          | 'HK'
-          | 'HU'
-          | 'IS'
-          | 'IN'
-          | 'ID'
-          | 'IR'
-          | 'IQ'
-          | 'IE'
-          | 'IL'
-          | 'IT'
-          | 'JM'
-          | 'JP'
-          | 'JO'
-          | 'KZ'
-          | 'KE'
-          | 'KI'
-          | 'KP'
-          | 'KR'
-          | 'KW'
-          | 'KG'
-          | 'LA'
-          | 'LV'
-          | 'LB'
-          | 'LS'
-          | 'LR'
-          | 'LY'
-          | 'LI'
-          | 'LT'
-          | 'LU'
-          | 'MO'
-          | 'MG'
-          | 'MW'
-          | 'MY'
-          | 'MV'
-          | 'ML'
-          | 'MT'
-          | 'MH'
-          | 'MQ'
-          | 'MR'
-          | 'MU'
-          | 'YT'
-          | 'MX'
-          | 'FM'
-          | 'MD'
-          | 'MC'
-          | 'MN'
-          | 'MS'
-          | 'MA'
-          | 'MZ'
-          | 'MM'
-          | 'NA'
-          | 'NR'
-          | 'NP'
-          | 'NL'
-          | 'NC'
-          | 'NZ'
-          | 'NI'
-          | 'NE'
-          | 'NG'
-          | 'NU'
-          | 'NF'
-          | 'MK'
-          | 'MP'
-          | 'NO'
-          | 'OM'
-          | 'PK'
-          | 'PW'
-          | 'PS'
-          | 'PA'
-          | 'PG'
-          | 'PY'
-          | 'PE'
-          | 'PH'
-          | 'PN'
-          | 'PL'
-          | 'PT'
-          | 'PR'
-          | 'QA'
-          | 'RE'
-          | 'RO'
-          | 'RU'
-          | 'RW'
-          | 'SH'
-          | 'KN'
-          | 'LC'
-          | 'PM'
-          | 'VC'
-          | 'WS'
-          | 'SM'
-          | 'ST'
-          | 'SA'
-          | 'SN'
-          | 'SC'
-          | 'SL'
-          | 'SG'
-          | 'SK'
-          | 'SI'
-          | 'SB'
-          | 'SO'
-          | 'ZA'
-          | 'GS'
-          | 'ES'
-          | 'LK'
-          | 'SD'
-          | 'SR'
-          | 'SJ'
-          | 'SZ'
-          | 'SE'
-          | 'CH'
-          | 'SY'
-          | 'TW'
-          | 'TJ'
-          | 'TZ'
-          | 'TH'
-          | 'TL'
-          | 'TG'
-          | 'TK'
-          | 'TO'
-          | 'TT'
-          | 'TN'
-          | 'TR'
-          | 'TM'
-          | 'TC'
-          | 'TV'
-          | 'UG'
-          | 'UA'
-          | 'AE'
-          | 'GB'
-          | 'US'
-          | 'UM'
-          | 'UY'
-          | 'UZ'
-          | 'VU'
-          | 'VE'
-          | 'VN'
-          | 'VG'
-          | 'VI'
-          | 'WF'
-          | 'EH'
-          | 'YE'
-          | 'ZM'
-          | 'ZW'
-          | 'AX'
-          | 'BQ'
-          | 'CW'
-          | 'GG'
-          | 'IM'
-          | 'JE'
-          | 'ME'
-          | 'BL'
-          | 'MF'
-          | 'RS'
-          | 'SX'
-          | 'SS'
-          | 'XK'
-        )[]
-      | null;
+    markets?: string | null;
     id?: string | null;
   }[];
   quantity: number;
@@ -954,9 +701,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Region {
   id: number;
-  europe_markets: {
-    markets?:
-      | (
+  europe_markets?:
+    | {
+        market:
           | 'AF'
           | 'AL'
           | 'DZ'
@@ -1206,20 +953,17 @@ export interface Region {
           | 'RS'
           | 'SX'
           | 'SS'
-          | 'XK'
-        )
-      | null;
-    business_address?:
-      | {
-          address?: string | null;
+          | 'XK';
+        business_address: {
+          address: string;
           id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
-  asia_markets: {
-    markets?:
-      | (
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  asia_markets?:
+    | {
+        market:
           | 'AF'
           | 'AL'
           | 'DZ'
@@ -1469,20 +1213,17 @@ export interface Region {
           | 'RS'
           | 'SX'
           | 'SS'
-          | 'XK'
-        )
-      | null;
-    business_address?:
-      | {
-          address?: string | null;
+          | 'XK';
+        business_address: {
+          address: string;
           id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
-  africa_markets: {
-    markets?:
-      | (
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  africa_markets?:
+    | {
+        market:
           | 'AF'
           | 'AL'
           | 'DZ'
@@ -1732,20 +1473,17 @@ export interface Region {
           | 'RS'
           | 'SX'
           | 'SS'
-          | 'XK'
-        )
-      | null;
-    business_address?:
-      | {
-          address?: string | null;
+          | 'XK';
+        business_address: {
+          address: string;
           id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
-  americas_markets: {
-    markets?:
-      | (
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  americas_markets?:
+    | {
+        market:
           | 'AF'
           | 'AL'
           | 'DZ'
@@ -1995,17 +1733,14 @@ export interface Region {
           | 'RS'
           | 'SX'
           | 'SS'
-          | 'XK'
-        )
-      | null;
-    business_address?:
-      | {
-          address?: string | null;
+          | 'XK';
+        business_address: {
+          address: string;
           id?: string | null;
-        }[]
-      | null;
-    id?: string | null;
-  }[];
+        }[];
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2200,7 +1935,7 @@ export interface RegionsSelect<T extends boolean = true> {
   europe_markets?:
     | T
     | {
-        markets?: T;
+        market?: T;
         business_address?:
           | T
           | {
@@ -2212,7 +1947,7 @@ export interface RegionsSelect<T extends boolean = true> {
   asia_markets?:
     | T
     | {
-        markets?: T;
+        market?: T;
         business_address?:
           | T
           | {
@@ -2224,7 +1959,7 @@ export interface RegionsSelect<T extends boolean = true> {
   africa_markets?:
     | T
     | {
-        markets?: T;
+        market?: T;
         business_address?:
           | T
           | {
@@ -2236,7 +1971,7 @@ export interface RegionsSelect<T extends boolean = true> {
   americas_markets?:
     | T
     | {
-        markets?: T;
+        market?: T;
         business_address?:
           | T
           | {
