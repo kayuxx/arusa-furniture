@@ -1,19 +1,22 @@
-'use client'
-import type { TextFieldClientComponent } from 'payload'
-import './index.scss'
-import { TextInput, Button, FieldLabel } from '@payloadcms/ui'
-import React, { useCallback, useEffect, useState } from 'react'
+"use client";
+import type { TextFieldClientComponent } from "payload";
+import "./index.scss";
+import { TextInput, Button, FieldLabel, useField } from "@payloadcms/ui";
+import React, { useCallback, useEffect } from "react";
+
 const SelectProductAvailability: TextFieldClientComponent = (props) => {
-  const [couponCode, setCouonCode] = useState('')
+  const { value: couponCode, setValue: setCouponCode } = useField<string>({
+    path: props.path,
+  });
 
   const generateCoupon = useCallback(() => {
-    const coupon = Math.random().toString(36).substring(2, 8).toUpperCase()
-    setCouonCode(coupon)
-  }, [])
+    const coupon = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setCouponCode(coupon);
+  }, []);
 
   useEffect(() => {
-    generateCoupon()
-  }, [generateCoupon])
+    if (!couponCode) setTimeout(() => generateCoupon());
+  }, []);
 
   return (
     <div className="field-type">
@@ -41,7 +44,7 @@ const SelectProductAvailability: TextFieldClientComponent = (props) => {
         readOnly={true}
       />
     </div>
-  )
-}
+  );
+};
 
-export default SelectProductAvailability
+export default SelectProductAvailability;
