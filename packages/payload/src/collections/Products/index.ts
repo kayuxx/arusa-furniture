@@ -14,8 +14,15 @@ import {
   editorOrMarketingManager,
   selfEditor,
 } from "@repo/payload/access/editor";
+import type { CSSProperties } from "react";
 
 // TODO: sellers shouldn't be an array of sellers it should be only one seller and defined to the current user that is selling the product (as  role seller) and its read only value
+
+const pricingIndividualStyle: CSSProperties = {
+  width: "calc(100% / 3 - 10px)",
+  display: "inline-block",
+  marginRight: "10px",
+};
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -120,9 +127,10 @@ export const Products: CollectionConfig = {
               required: true,
             },
             {
-              name: "price",
+              name: "pricing",
               admin: {
-                description: "Set a price for each currency.",
+                description: "Set a price and discount for each currency.",
+                isSortable: false,
               },
               type: "array",
               validate: async (values, { req: { payload } }) => {
@@ -154,26 +162,37 @@ export const Products: CollectionConfig = {
                       Field:
                         "@repo/payload/components/SelectField/SelectCurrency",
                     },
+                    style: pricingIndividualStyle,
                   },
                   required: true,
                 },
                 {
                   name: "amount",
                   type: "number",
+                  admin: {
+                    style: pricingIndividualStyle,
+                  },
                   required: true,
+                },
+                {
+                  name: "discount",
+                  type: "number",
+                  admin: {
+                    style: pricingIndividualStyle,
+                  },
+                  min: 5,
+                  max: 100,
                 },
               ],
               required: true,
               unique: true,
             },
             {
-              name: "discount",
-              type: "number",
-              min: 5,
-              max: 100,
-            },
-            {
               type: "array",
+              admin: {
+                isSortable: false,
+                initCollapsed: true,
+              },
               name: "regions",
               fields: SelectProductAvailability,
               required: true,

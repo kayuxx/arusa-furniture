@@ -149,14 +149,14 @@ export interface Product {
   gallery: (number | Media)[];
   description: string;
   /**
-   * Set a price for each currency.
+   * Set a price and discount for each currency.
    */
-  price: {
+  pricing: {
     currency: string;
     amount: number;
+    discount?: number | null;
     id?: string | null;
   }[];
-  discount?: number | null;
   regions: {
     region: 'Europe' | 'Asia' | 'Africa' | 'Americas';
     markets?:
@@ -489,14 +489,14 @@ export interface ProductsSelect<T extends boolean = true> {
   heroImage?: T;
   gallery?: T;
   description?: T;
-  price?:
+  pricing?:
     | T
     | {
         currency?: T;
         amount?: T;
+        discount?: T;
         id?: T;
       };
-  discount?: T;
   regions?:
     | T
     | {

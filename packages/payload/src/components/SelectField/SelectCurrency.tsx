@@ -9,15 +9,16 @@ import { SelectField, useWatchForm } from "@payloadcms/ui";
 import React, { useEffect, useState } from "react";
 import getCurrenciesAction from "./getCurrenciesAction";
 
-type Price = {
+type Pricing = {
   amunt: number;
   currency: string;
+  discount: string;
 };
 
 function filterOptions(options: Option[], data: Data, siblingData: Data) {
-  const prices = data.price;
+  const prices = data.pricing;
   const dataExcludingCurrentSelection = prices.filter(
-    (e: Price) => e.currency !== siblingData.currency,
+    (e: Pricing) => e.currency !== siblingData.currency,
   );
   return options.filter((e) =>
     dataExcludingCurrentSelection.every(
@@ -63,6 +64,7 @@ export const SelectCurrency: TextFieldClientComponent = ({
       placeholder: field.admin?.placeholder,
       description: field.admin?.description,
       disabled: field.admin?.disabled,
+      style: field.admin?.style,
     },
   };
 

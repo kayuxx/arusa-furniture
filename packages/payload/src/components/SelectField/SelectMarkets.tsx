@@ -106,7 +106,6 @@ export const SelectMarkets: ArrayFieldClientComponent = ({ field, path }) => {
 
     const newState = { ...fields };
     for (const key of Object.keys(newState)) {
-      console.log({ key });
       if (key === path) continue;
       if (key.includes(path)) delete newState[key];
     }
