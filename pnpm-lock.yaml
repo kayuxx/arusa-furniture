@@ -320,6 +320,9 @@ importers:
       i18n-iso-countries:
         specifier: ^7.14.0
         version: 7.14.0
+      locale-currency:
+        specifier: ^0.0.4
+        version: 0.0.4
       next:
         specifier: ^15.4.2
         version: 15.4.6(@babel/core@7.28.3)(@playwright/test@1.54.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.77.4)
@@ -3822,6 +3825,9 @@ packages:
 
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
+
+  locale-currency@0.0.4:
+    resolution: {integrity: sha512-S3pRVxU7xZDFlN4DkvLChQf8e1xm39XD6gkiWk1GI7nP3P7VMXHTWD/ZLLr13rAKNRpAeNCgTTMMNxEG8GZYRQ==}
 
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
@@ -9287,6 +9293,8 @@ snapshots:
       lightningcss-win32-x64-msvc: 1.30.1
 
   lines-and-columns@1.2.4: {}
+
+  locale-currency@0.0.4: {}
 
   locate-path@6.0.0:
     dependencies:

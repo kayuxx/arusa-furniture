@@ -159,7 +159,12 @@ export interface Product {
   discount?: number | null;
   regions: {
     region: 'Europe' | 'Asia' | 'Africa' | 'Americas';
-    markets?: string | null;
+    markets?:
+      | {
+          market?: string | null;
+          id?: string | null;
+        }[]
+      | null;
     id?: string | null;
   }[];
   quantity: number;
@@ -496,7 +501,12 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         region?: T;
-        markets?: T;
+        markets?:
+          | T
+          | {
+              market?: T;
+              id?: T;
+            };
         id?: T;
       };
   quantity?: T;
@@ -1921,6 +1931,7 @@ export interface CurrenciesList {
       | 'ZMK'
       | 'ZWL';
     name: string;
+    locale: string;
     is_default?: boolean | null;
     id?: string | null;
   }[];
@@ -1994,6 +2005,7 @@ export interface CurrenciesListSelect<T extends boolean = true> {
     | {
         currency?: T;
         name?: T;
+        locale?: T;
         is_default?: T;
         id?: T;
       };

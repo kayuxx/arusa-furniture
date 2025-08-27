@@ -5,13 +5,22 @@ import {
   SelectFieldClient,
   TextFieldClientComponent,
 } from "payload";
-import { SelectField, useDocumentInfo } from "@payloadcms/ui";
+import { SelectField, useWatchForm } from "@payloadcms/ui";
 import React, { useEffect, useState } from "react";
 import getCurrenciesAction from "./getCurrenciesAction";
 
-function filterOptions(options: Option[], savedDocumentData: Data) {
+type Price = {
+  amunt: number;
+  currency: string;
+};
+
+function filterOptions(options: Option[], data: Data, siblingData: Data) {
+  const prices = data.price;
+  const dataExcludingCurrentSelection = prices.filter(
+    (e: Price) => e.currency !== siblingData.currency,
+  );
   return options.filter((e) =>
-    savedDocumentData.price.every(
+    dataExcludingCurrentSelection.every(
       (d: { currency: string }) =>
         d.currency !== (e as { value: string }).value,
     ),
@@ -24,8 +33,10 @@ export const SelectCurrency: TextFieldClientComponent = ({
   permissions,
   schemaPath,
 }) => {
-  const { savedDocumentData } = useDocumentInfo();
+  const { getData, getSiblingData } = useWatchForm();
   const [options, setOptions] = useState<Option[] | []>([]);
+  const data = getData();
+  const siblingData = getSiblingData(path);
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -34,14 +45,10 @@ export const SelectCurrency: TextFieldClientComponent = ({
         label: e.name,
         value: e.currency,
       }));
-      setOptions(
-        savedDocumentData
-          ? filterOptions(fetchedOptions, savedDocumentData)
-          : fetchedOptions,
-      );
+      setOptions(filterOptions(fetchedOptions, data, siblingData));
     };
     fetchOptions();
-  }, [savedDocumentData]);
+  }, []);
 
   const clientSelectField: Omit<SelectFieldClient, "type"> &
     Partial<Pick<SelectFieldClient, "type">> = {

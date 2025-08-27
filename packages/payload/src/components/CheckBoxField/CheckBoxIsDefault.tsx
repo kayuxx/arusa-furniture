@@ -3,13 +3,17 @@ import type React from "react";
 import {
   CheckboxField,
   FieldLabel,
-  useDocumentInfo,
   useField,
-  useFormFields,
   useWatchForm,
 } from "@payloadcms/ui";
 import type { CheckboxFieldClientComponent } from "payload";
 import { useEffect, useState } from "react";
+
+type CurrencyType = {
+  is_default: boolean;
+  name: string;
+  currency: string;
+};
 
 export const CheckBoxIsDefault: CheckboxFieldClientComponent = ({
   field: clientField,
@@ -23,11 +27,8 @@ export const CheckBoxIsDefault: CheckboxFieldClientComponent = ({
     path: path.replace(/\.[^.]+$/, ".currency"),
   });
   const data = getData();
-  const defaultCurrency = (
-    data["currencies"] as [
-      { is_default: boolean; name: string; currency: string },
-    ]
-  ).find((e) => e.is_default);
+  const currencies = data["currencies"] as CurrencyType[] | 0;
+  const defaultCurrency = (currencies || []).find((e) => e.is_default);
 
   useEffect(() => {
     if (currencyCode !== defaultCurrency?.currency) {

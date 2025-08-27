@@ -1,8 +1,14 @@
-import type { GlobalConfig } from "payload";
+import type { Data, GlobalConfig } from "payload";
 
 import { currencies } from "@repo/payload/constants";
 import { admin } from "../access/admin";
+import { isValid } from "i18n-iso-countries";
 
+type Currency = {
+  name: string;
+  currency: string;
+  locale: string;
+};
 export const Currencies: GlobalConfig = {
   slug: "currenciesList",
   label: "Currencies",
@@ -24,12 +30,15 @@ export const Currencies: GlobalConfig = {
         {
           type: "select",
           name: "currency",
-          filterOptions: ({ options, data }) => {
+          filterOptions: ({ options, data, siblingData }) => {
             if (!data.currencies) return options;
+
+            const dataExcludingCurrentSelection = data.currencies.filter(
+              (e: Currency) => e.currency !== siblingData.currency,
+            );
             return options.filter((e) =>
-              data.currencies.every(
-                (d: { name: string; currency: string }) =>
-                  d.currency !== (e as { value: string }).value,
+              dataExcludingCurrentSelection.every(
+                (d: Currency) => d.currency !== (e as { value: string }).value,
               ),
             );
           },
@@ -45,6 +54,16 @@ export const Currencies: GlobalConfig = {
           admin: {
             components: {
               Field: "@repo/payload/components/TextField/CurrencyName",
+            },
+          },
+          required: true,
+        },
+        {
+          type: "text",
+          name: "locale",
+          admin: {
+            components: {
+              Field: "@repo/payload/components/TextField/Locale",
             },
           },
           required: true,

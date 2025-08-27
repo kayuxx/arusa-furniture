@@ -15,7 +15,7 @@ const SelectProductAvailability: TextFieldClientComponent = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!couponCode) setTimeout(() => generateCoupon());
+    if (!couponCode) setTimeout(() => generateCoupon(), 0);
   }, []);
 
   return (

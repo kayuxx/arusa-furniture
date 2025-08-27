@@ -1,6 +1,9 @@
 import type { Field } from "payload";
 import { continents } from "../../../constants";
 
+type Region = {
+  region: string;
+};
 const RegionField: Field = {
   name: "region",
   label: "Region",
@@ -9,20 +12,22 @@ const RegionField: Field = {
     label: e,
     value: e,
   })),
-  //@ts-expect-error type error
-  validate: () => true,
-  filterOptions: ({ options, data }) => {
+  filterOptions: ({ options, data, siblingData }) => {
     if (!data.regions) return options;
+    const dataExcludingCurrentSelection = data.regions.filter(
+      (e: Region) => e.region !== siblingData.region,
+    );
+
     return options.filter((e) =>
-      data.regions.every(
-        (d: { region: string }) => d.region !== (e as { value: string }).value,
+      dataExcludingCurrentSelection.every(
+        (d: Region) => d.region !== (e as { value: string }).value,
       ),
     );
   },
   admin: {
     isClearable: false,
     components: {
-      Field: "@repo/payload/components/SelectField/SelectProductAvailability",
+      // Field: "@repo/payload/components/SelectField/SelectProductAvailability",
     },
   },
   required: true,
@@ -32,7 +37,13 @@ const RegionField: Field = {
 const MarketsField: Field = {
   name: "markets",
   label: "Markets",
-  type: "text",
+  type: "array",
+  fields: [
+    {
+      name: "market",
+      type: "text",
+    },
+  ],
   admin: {
     condition: (_, siblingData) => Boolean(siblingData?.region),
     components: {
