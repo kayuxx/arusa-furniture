@@ -18,11 +18,11 @@ import type { CSSProperties } from "react";
 
 // TODO: sellers shouldn't be an array of sellers it should be only one seller and defined to the current user that is selling the product (as  role seller) and its read only value
 
-const pricingIndividualStyle: CSSProperties = {
-  width: "calc(100% / 3 - 10px)",
-  display: "inline-block",
-  marginRight: "10px",
-};
+// const pricingIndividualStyle: CSSProperties = {
+//   width: "calc(100% / 3 - 10px)",
+//   display: "inline-block",
+//   marginRight: "10px",
+// };
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -155,33 +155,31 @@ export const Products: CollectionConfig = {
               },
               fields: [
                 {
-                  name: "currency",
-                  type: "text",
-                  admin: {
-                    components: {
-                      Field:
-                        "@repo/payload/components/SelectField/SelectCurrency",
+                  type: "row",
+                  fields: [
+                    {
+                      name: "currency",
+                      type: "text",
+                      admin: {
+                        components: {
+                          Field:
+                            "@repo/payload/components/SelectField/SelectCurrency",
+                        },
+                      },
+                      required: true,
                     },
-                    style: pricingIndividualStyle,
-                  },
-                  required: true,
-                },
-                {
-                  name: "amount",
-                  type: "number",
-                  admin: {
-                    style: pricingIndividualStyle,
-                  },
-                  required: true,
-                },
-                {
-                  name: "discount",
-                  type: "number",
-                  admin: {
-                    style: pricingIndividualStyle,
-                  },
-                  min: 5,
-                  max: 100,
+                    {
+                      name: "amount",
+                      type: "number",
+                      required: true,
+                    },
+                    {
+                      name: "discount",
+                      type: "number",
+                      min: 5,
+                      max: 100,
+                    },
+                  ],
                 },
               ],
               required: true,
